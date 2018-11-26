@@ -33,7 +33,7 @@ def parse_arguments():
         help='user last name', default=None
     )
     parser.add_argument('-bd', '--birthday', type=validate_date,
-        help='user birthday in format dd.mm.yy', default=None
+        help='user birthday in format dd.mm.yy', default=[]
     )
     parser.add_argument('-c', '--company', type=str, default=None,
         help='company name or abbreviation',
@@ -47,7 +47,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def join_personal_info(list_of_data):
+def join_personal_info(list_of_data, birthday=None):
     personal_info = [element for element in list_of_data if not element is None]
     if len(personal_info):
         return personal_info
