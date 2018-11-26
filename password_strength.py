@@ -6,6 +6,8 @@ import os
 DEFAULT_BLACK_LIST = ('123456', '123456789', '111111',
                       'password', 'qwerty', 'abc123', '12345678',
                       'password1', '1234567', '123123',)
+MAX_RELIABILITY = 10
+MIN_RELIABILITY = 1
 
 
 def validate_date(input_string):
@@ -91,8 +93,8 @@ def get_password_strength(password, personal_info, filename_black_list):
             password_strength += -3
         else:
             password_strength += 1
-    password_strength = max(password_strength, 1)
-    password_strength = min(password_strength, 10)
+    password_strength = max(password_strength, MIN_RELIABILITY)
+    password_strength = min(password_strength, MAX_RELIABILITY)
     return password_strength
 
 
