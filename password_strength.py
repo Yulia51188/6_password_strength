@@ -47,7 +47,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def join_personal_info(list_of_data, birthday=None):
+def join_personal_info(list_of_data):
     personal_info = [element for element in list_of_data if not element is None]
     if len(personal_info):
         return personal_info
@@ -84,8 +84,8 @@ def check_entry_of_personal_info(password, personal_info):
 def get_password_strength(password, personal_info, filename_black_list):
     password_strength = sum([
         1,
-        len(password) > 8,
-        len(password) > 12,
+        int(len(password) > 8),
+        int(len(password) > 12),
         count_number_of_symbols_types(password)
     ])
     if password in DEFAULT_BLACK_LIST:
