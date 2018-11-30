@@ -6,9 +6,6 @@ import os
 DEFAULT_BLACK_LIST = ('123456', '123456789', '111111',
                       'password', 'qwerty', 'abc123', '12345678',
                       'password1', '1234567', '123123',)
-MAX_PASSWORD_STRENGTH = 10
-MIN_PASSWORD_STRENGTH = 1
-
 
 def validate_date(input_string):
     try:
