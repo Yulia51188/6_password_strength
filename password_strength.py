@@ -23,20 +23,43 @@ def parse_arguments():
     parser = argparse.ArgumentParser(
         description='Test your password reliability'
     )
-    parser.add_argument('password', type=str,
-                        help='input password')
-    parser.add_argument('-fn', '--first_name', type=str,
-                        help='user first name', default=None)
-    parser.add_argument('-ln', '--last_name', type=str,
-                        help='user last name', default=None)
-    parser.add_argument('-bd', '--birthday', type=validate_date,
-                        help='user birthday in format dd.mm.yy', default=[])
-    parser.add_argument('-c', '--company', type=str, default=None,
-                        help='company name or abbreviation')
-    parser.add_argument('-e', '--email', type=str, help='user email',
-                        default=None)
-    parser.add_argument('-bl', '--black_list', type=str, default=None,
-                        help='path to text file with password black list')
+    parser.add_argument('password', type=str, help='input password')
+    parser.add_argument(
+        '-fn', '--first_name',
+        type=str,
+        help='user first name',
+        default=None
+    )
+    parser.add_argument(
+        '-ln', '--last_name',
+        type=str,
+        help='user last name',
+        default=None
+    )
+    parser.add_argument(
+        '-bd', '--birthday',
+        type=validate_date,
+        help='user birthday in format dd.mm.yy',
+        default=[]
+    )
+    parser.add_argument(
+        '-c', '--company',
+        type=str,
+        default=None,
+        help='company name or abbreviation'
+    )
+    parser.add_argument(
+        '-e', '--email',
+        type=str,
+        help='user email',
+        default=None
+    )
+    parser.add_argument(
+        '-bl', '--black_list',
+        type=str,
+        default=None,
+        help='path to text file with password black list'
+    )
     return parser.parse_args()
 
 
@@ -74,7 +97,8 @@ def check_entry_of_personal_info(password, personal_info):
     return entry
 
 
-def get_password_strength(password, personal_info, filename_black_list):
+def get_password_strength(password, personal_info, filename_black_list,
+                          min_strength=1, max_strength=10):
     password_strength = sum([
         1,
         int(len(password) > 8),
@@ -93,8 +117,8 @@ def get_password_strength(password, personal_info, filename_black_list):
             password_strength += -3
         else:
             password_strength += 1
-    password_strength = max(password_strength, MIN_PASSWORD_STRENGTH)
-    password_strength = min(password_strength, MAX_PASSWORD_STRENGTH)
+    password_strength = max(password_strength, min_strength)
+    password_strength = min(password_strength, max_strength)
     return password_strength
 
 
